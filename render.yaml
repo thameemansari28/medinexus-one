@@ -1,0 +1,22 @@
+services:
+  - type: web
+    runtime: node
+    name: medinexus-api
+    plan: starter
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: MEDINEXUS_USE_SUPABASE
+        value: "false"
+      - key: MEDINEXUS_DATA_DIR
+        value: /var/data
+      - key: FRONTEND_URL
+        sync: false
+    disk:
+      name: medinexus-data
+      mountPath: /var/data
+      sizeGB: 1

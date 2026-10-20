@@ -1,0 +1,276 @@
+
+.recovery-page {
+  display: grid;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: var(--text-primary, #211b35);
+}
+
+.recovery-header,
+.recovery-card-heading,
+.voice-message-top,
+.recovery-doctor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.recovery-header {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.recovery-header h2 {
+  margin: 10px 0 6px;
+  font-size: clamp(24px, 3vw, 32px);
+}
+
+.recovery-header p,
+.recovery-card-heading p,
+.recovery-helper {
+  color: var(--text-muted, #777187);
+  line-height: 1.6;
+  margin: 5px 0 0;
+}
+
+.recovery-eyebrow,
+.voice-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #6d4bc3;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .05em;
+}
+
+.demo-pill,
+.demo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: #fff4d9;
+  color: #855b09;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.recovery-notice {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid #f0d99b;
+  background: #fffbef;
+  color: #664a12;
+  padding: 15px;
+  border-radius: 14px;
+}
+
+.recovery-notice p {
+  margin: 5px 0 0;
+  line-height: 1.5;
+}
+
+.recovery-card {
+  min-width: 0;
+  padding: 22px;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #eae6f1);
+  border-radius: 18px;
+  box-shadow: 0 5px 22px rgb(44 28 80 / 4%);
+}
+
+.recovery-card-heading {
+  margin-bottom: 20px;
+}
+
+.recovery-card-heading h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.recovery-icon,
+.doctor-avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: #7047c8;
+  background: #f0eaff;
+}
+
+.recovery-label {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.recovery-label select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #e5dfed);
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.voice-message {
+  margin-top: 20px;
+  padding: 17px;
+  border: 1px solid #e3d8ff;
+  border-radius: 14px;
+  background: #faf8ff;
+}
+
+.voice-message-top {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.voice-status span,
+.footer-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #16a36a;
+}
+
+.voice-toggle,
+.recovery-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  border: 1px solid #ddd2f4;
+  border-radius: 10px;
+  padding: 9px 13px;
+  background: white;
+  color: #6540b6;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.voice-message > p {
+  line-height: 1.7;
+  margin: 17px 0;
+}
+
+.recovery-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 43px;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  background: #7047c8;
+  color: white;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.recovery-primary:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.recovery-secondary {
+  margin-top: 5px;
+}
+
+.recovery-doctor-list {
+  display: grid;
+  gap: 11px;
+  margin-bottom: 17px;
+}
+
+.recovery-doctor {
+  padding: 14px;
+  border: 1px solid var(--border, #e8e2f0);
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.recovery-doctor.selected {
+  border-color: #8660d4;
+  background: #faf7ff;
+}
+
+.recovery-doctor input {
+  accent-color: #7047c8;
+}
+
+.doctor-info {
+  display: grid;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.doctor-info small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-muted, #777187);
+}
+
+.recovery-feedback {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f0eaff;
+  color: #55369a;
+  line-height: 1.6;
+}
+
+.indoor-fallback {
+  display: grid;
+  justify-items: start;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff8e9;
+  color: #755415;
+  line-height: 1.6;
+}
+
+.indoor-fallback p {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .recovery-header {
+    flex-direction: column;
+  }
+
+  .recovery-card {
+    padding: 16px;
+  }
+
+  .recovery-doctor {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .demo-tag {
+    margin-left: auto;
+  }
+
+  .recovery-primary,
+  .recovery-secondary {
+    width: 100%;
+  }
+}
