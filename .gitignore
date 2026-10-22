@@ -30,3 +30,7 @@ backend/data/
 *.njsproj
 *.sln
 *.sw?
+
+# Local presentation files (kept out of the GitHub repository)
+presentation/*.pptx
+PPT-RESEARCH-SLIDE.md
