@@ -83,6 +83,41 @@ function generateClinicalNavigationResponse(prompt, hospitals = [], language = "
   } else if (lower.includes("child") || lower.includes("baby") || lower.includes("infant") || lower.includes("fever") && lower.includes("kid")) {
     specialty = "Paediatrics & Neonatology";
     guidance = language === "ta" ? "தமிழ்: குழந்தைகளின் உடல்நலம் மற்றும் தடுப்பூசிகளுக்கு குழந்தை நல மருத்துவரை அணுகுங்கள்.\n\nEnglish: For a child's health or vaccinations, consult a paediatric specialist." : "For pediatric health and vaccinations, consult a Paediatric specialist.";
+  } else if (/(appointment|book|booking|reschedule|cancel|slot|சந்திப்பு|பதிவு நேரம்)/.test(lower)) {
+    specialty = "Appointment support";
+    guidance = language === "ta"
+      ? "தமிழ்: சந்திப்பை பதிவு செய்ய, மருத்துவமனை, துறை, தேதி மற்றும் நேரத்தைத் தேர்வு செய்யுங்கள். பதிவு செய்த பிறகு உங்கள் சந்திப்புகள் பக்கத்தில் நிலையைப் பார்க்கலாம்.\n\nEnglish: To book an appointment, choose a hospital, specialty, date, and time. After booking, review its status on the Appointments page."
+      : "To book an appointment, choose a hospital, specialty, date, and time. After booking, review its status on the Appointments page.";
+  } else if (/(hospital|nearby|near me|map|direction|location|address|மருத்துவமனை|அருகில்|வரைபடம்|முகவரி)/.test(lower)) {
+    specialty = "Hospital navigation";
+    guidance = language === "ta"
+      ? "தமிழ்: மருத்துவமனைகளைத் தேட Hospital Maps பக்கத்தைத் திறக்கவும். செல்லும் முன் முகவரி, திறந்திருக்கும் நேரம் மற்றும் சேவையை மருத்துவமனையிடம் நேரடியாக உறுதிப்படுத்துங்கள்.\n\nEnglish: Open Hospital Maps to search the directory and view a location. Confirm the address, opening hours, and service with the hospital before travelling."
+      : "Open Hospital Maps to search the directory and view a location. Confirm the address, opening hours, and service with the hospital before travelling.";
+  } else if (/(doctor|consultant|availability|available|schedule|மருத்துவர்|கிடைக்கும்|நேரம்)/.test(lower)) {
+    specialty = "Doctor availability";
+    guidance = language === "ta"
+      ? "தமிழ்: Doctor Recovery பக்கத்தில் துறை வாரியாக மருத்துவர் பட்டியலைப் பார்க்கலாம். மருத்துவரின் தற்போதைய நேரம் மற்றும் கிடைப்பை மருத்துவமனையிடம் நேரடியாக உறுதிப்படுத்துங்கள்.\n\nEnglish: Use Doctor Recovery to browse the doctor directory by specialty. Confirm current schedules and availability directly with the hospital."
+      : "Use Doctor Recovery to browse the doctor directory by specialty. Confirm current schedules and availability directly with the hospital.";
+  } else if (/(bed|icu|ward|admission|patient count|patients|படுக்கை|ICU|வார்டு|அனுமதி|நோயாளி)/.test(lower)) {
+    specialty = "Admission and bed enquiry";
+    guidance = language === "ta"
+      ? "தமிழ்: படுக்கை அல்லது ICU கிடைப்பை இந்த செயலி உறுதிப்படுத்தாது. தேர்ந்தெடுத்த மருத்துவமனையின் அவசர அல்லது சேர்க்கை பிரிவுக்கு நேரடியாக அழைத்து தற்போதைய நிலையை உறுதிப்படுத்துங்கள்.\n\nEnglish: This app cannot confirm live bed or ICU availability. Call the selected hospital's emergency or admissions desk to confirm the current status."
+      : "This app cannot confirm live bed or ICU availability. Call the selected hospital's emergency or admissions desk to confirm the current status.";
+  } else if (/(record|report|prescription|profile|allergy|medicine|medical history|பதிவு|அறிக்கை|மருந்து|ஒவ்வாமை|சுயவிவரம்)/.test(lower)) {
+    specialty = "Personal health information";
+    guidance = language === "ta"
+      ? "தமிழ்: Health Profile பக்கத்தில் உங்கள் அவசர மருத்துவத் தகவலைப் புதுப்பிக்கலாம்; Medical Records பக்கத்தில் தனிப்பட்ட பதிவுகளைச் சேர்க்கலாம். தேவையானதை மட்டும் சேமித்து, அவசரநிலையில் பகிர அனுமதியை கவனமாகத் தேர்ந்தெடுக்கவும்.\n\nEnglish: Update emergency medical details on Health Profile and add personal documents in Medical Records. Save only what you need and choose emergency sharing carefully."
+      : "Update emergency medical details on Health Profile and add personal documents in Medical Records. Save only what you need and choose emergency sharing carefully.";
+  } else if (/(hello|hi|help|what can you do|வணக்கம்|உதவி)/.test(lower)) {
+    specialty = "Care navigation";
+    guidance = language === "ta"
+      ? "தமிழ்: மருத்துவமனை தேடல், துறை தேர்வு, சந்திப்பு தயாரிப்பு, தனிப்பட்ட மருத்துவ விவரம், பதிவுகள் மற்றும் செயலி வழிசெலுத்தலுக்கு நான் உதவுவேன். அவசர நிலையில் 112 அல்லது 108-ஐ உடனே அழைக்கவும்.\n\nEnglish: I can help with hospital search, specialty selection, appointment preparation, personal health information, records, and app navigation. For an emergency, call 112 or 108 now."
+      : "I can help with hospital search, specialty selection, appointment preparation, personal health information, records, and app navigation. For an emergency, call 112 or 108 now.";
+  } else {
+    const question = String(prompt || "your question").replace(/\s+/g, " ").trim().slice(0, 180);
+    guidance = language === "ta"
+      ? `தமிழ்: “${question}” பற்றி கேட்டுள்ளீர்கள். மருத்துவமனைத் தேடல், துறை தேர்வு, சந்திப்பு, மருத்துவர் விவரம், பதிவுகள் அல்லது செயலி வழிசெலுத்தல் குறித்து மேலும் உதவ முடியும். அவசர அறிகுறிகள் இருந்தால் 112 அல்லது 108-ஐ அழைக்கவும்.\n\nEnglish: You asked about “${question}”. I can help with hospital search, specialty selection, appointments, doctor information, records, or app navigation. If there are emergency symptoms, call 112 or 108.`
+      : `You asked about “${question}”. I can help with hospital search, specialty selection, appointments, doctor information, records, or app navigation. If there are emergency symptoms, call 112 or 108.`;
   }
 
   // Find matching hospitals offering this specialty

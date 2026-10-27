@@ -83,7 +83,7 @@ async function startSession(user, res) {
     expiresAt: new Date(Date.now() + LOCAL_SESSION_SECONDS * 1000).toISOString(),
   });
   setLocalSessionCookie(res, token);
-  return publicUser(user);
+  return { user: publicUser(user), accessToken: token };
 }
 
 router.post("/register", async (req, res, next) => {
@@ -106,7 +106,7 @@ router.post("/register", async (req, res, next) => {
     const passwordHash = await makePasswordHash(password);
     const user = await db.createLocalUser({ email, fullName, passwordHash });
     if (!user) return res.status(409).json({ message: "An account with this email already exists. Sign in instead." });
-    return res.status(201).json({ user: await startSession(user, res) });
+    return res.status(201).json(await startSession(user, res));
   } catch (error) {
     return next(error);
   }
@@ -124,7 +124,7 @@ router.post("/login", loginRateLimit, async (req, res, next) => {
       return res.status(401).json({ message: "Email or password is incorrect." });
     }
     failedLogins.delete(rateKey);
-    return res.json({ user: await startSession(user, res) });
+    return res.json(await startSession(user, res));
   } catch (error) {
     return next(error);
   }

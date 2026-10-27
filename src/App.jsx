@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
-import { apiRequest as api } from "./api.js";
+import { apiRequest as api, clearAccessToken, setAccessToken } from "./api.js";
 import { cleanSpeechText, findPreferredVoice, getSavedVoiceChoice, speechParts } from "./lib/speech.js";
 
 import PatientJourney from "./PatientJourney.jsx";
@@ -867,6 +867,7 @@ export default function App() {
           method: "POST",
           body: JSON.stringify({ email: authForm.email.trim(), password: authForm.password, fullName: authForm.name.trim() }),
         });
+        setAccessToken(data.accessToken);
         setUser(data.user);
         setNotice(tamil ? "கணக்கு உருவாக்கப்பட்டது. நீங்கள் உள்நுழைந்துள்ளீர்கள்." : "Account created. You are signed in.");
       } else {
@@ -874,6 +875,7 @@ export default function App() {
           method: "POST",
           body: JSON.stringify({ email: authForm.email.trim(), password: authForm.password }),
         });
+        setAccessToken(data.accessToken);
         setUser(data.user);
         setNotice(tamil ? "MediNexus One-க்கு மீண்டும் வரவேற்கிறோம்." : "Welcome back to MediNexus One.");
       }
@@ -891,6 +893,7 @@ export default function App() {
     try {
       await api("/auth/logout", { method: "POST" });
     } catch {}
+    clearAccessToken();
     setUser(null);
     setAppointments([]);
     setReceipts([]);
