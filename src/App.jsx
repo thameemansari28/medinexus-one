@@ -2234,7 +2234,7 @@ export default function App() {
                 </div>
                 <div className={`tracker-step ${activeIncident?.notificationAttempts?.length ? "step-verified" : "step-notice"}`}>
                   <span className="tracker-label">Step 4: Contact SMS</span>
-                  <span className="tracker-value">{activeIncident?.notificationAttempts?.[0]?.status || "No automatic SMS sent"}</span>
+                  <span className="tracker-value">{activeIncident?.notificationAttempts?.[0]?.status === "unconfigured_provider" ? "Use Text details to open your SMS app" : activeIncident?.notificationAttempts?.[0]?.status || "Use Text details to open your SMS app"}</span>
                 </div>
                 <div className="tracker-step step-notice">
                   <span className="tracker-label">Step 5: Ambulance Dispatch</span>
